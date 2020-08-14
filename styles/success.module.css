@@ -1,0 +1,157 @@
+.row {
+  padding: 5rem 0;
+  max-width: 920px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.info > div {
+  font-size: 0.875rem;
+  display: flex;
+  padding: 0.1875rem 0;
+  color: #353536;
+}
+
+.info > div span {
+  display: block;
+  width: 5rem;
+  font-weight: 500;
+}
+
+.items {
+  flex-shrink: 0;
+  max-width: 32rem;
+  width: 100%;
+}
+
+.info h3,
+.items h3 {
+  margin: 0 0 1.625rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.item {
+  padding: 0.875rem 0 0.75rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #dbdee2;
+}
+
+.image {
+  width: 3.75rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.image img {
+  width: 2.625rem;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  max-width: 175px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.details h3 {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #36383e;
+}
+
+.details p {
+  margin: 0.1875rem 0 0;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #a8a8b5;
+}
+
+.quantity {
+  flex-shrink: 0;
+  width: 4rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  color: #3d3d48;
+}
+
+.quantity span {
+  margin-right: 1rem;
+  font-weight: 400;
+  color: #a8a8b5;
+}
+
+.total {
+  width: 4rem;
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #3d3d48;
+}
+
+.total span {
+  margin-top: -3px;
+  margin-right: 2px;
+  font-size: 0.75rem;
+}
+
+.subtotal {
+  margin: 1.25rem 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #36383e;
+}
+
+.subtotal span {
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
+  color: #bdbdc7;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 900px) {
+  .row {
+    flex-direction: column;
+    padding: 4rem 0 0;
+  }
+
+  .items > h3 {
+    margin-top: 4rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .item {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 0.75rem 0;
+  }
+
+  .quantity {
+    justify-content: flex-end;
+  }
+
+  .total {
+    width: 100%;
+    text-align: right;
+    margin-top: -1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .details {
+    width: 50%;
+  }
+}

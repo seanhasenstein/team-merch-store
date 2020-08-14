@@ -1,0 +1,40 @@
+.instructions h2,
+.instructions h3 {
+  margin: 0 0 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.instructions h4 {
+  margin: 5rem 0 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.instructions p {
+  margin: 0;
+  max-width: 600px;
+  font-size: 0.875rem;
+  color: #576366;
+  line-height: 1.75;
+}
+
+.instructions p span {
+  text-decoration: underline;
+}
+
+.instructions a {
+  color: #576366;
+}
+
+.instructions a:hover {
+  color: #343b3d;
+}
+
+@media (max-width: 1000px) {
+  .instructions h4 {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+}

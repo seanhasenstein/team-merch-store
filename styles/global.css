@@ -1,0 +1,95 @@
+@font-face {
+  font-family: 'Gotham Rounded';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/Gotham-Rounded-Book.woff2') format('woff2');
+  src: url('/fonts/Gotham-Rounded-Book.woff') format('woff');
+  src: url('/fonts/Gotham-Rounded-Book.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Gotham Rounded';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/fonts/Gotham-Rounded-Medium.woff2') format('woff2');
+  src: url('/fonts/Gotham-Rounded-Medium.woff') format('woff');
+  src: url('/fonts/Gotham-Rounded-Medium.ttf') format('truetype');
+}
+
+body {
+  font-family: 'Gotham Rounded', sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  color: #353536;
+}
+
+p {
+  font-size: 0.875rem;
+  color: #576366;
+}
+
+button,
+input,
+select {
+  font-family: 'Gotham Rounded', sans-serif;
+}
+
+button {
+  border: none;
+  box-shadow: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.form-input {
+  appearance: none;
+  background-color: #fff;
+  border: 2px solid #dddde2;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+input[type='text']:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(65, 141, 203, 0.2);
+  border-color: #8faef4;
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%239fa6b2' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  appearance: none;
+  color-adjust: exact;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  border: 2px solid #dddde2;
+  border-radius: 0.375rem;
+  padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-position: right 0.5rem center;
+  background-size: 1.5em 1.5em;
+}
+
+select:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(65, 141, 203, 0.2);
+  border-color: #8faef4;
+}

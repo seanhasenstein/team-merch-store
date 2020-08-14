@@ -1,88 +1,56 @@
-import React from 'react'
-import Head from 'next/head'
-import Nav from '../components/nav'
+import React from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import Layout from '../components/Layout';
+import ShoppingItem from '../components/ShoppingItem';
+import Instructions from '../components/Instructions';
+import styles from '../styles/main.module.css';
 
 const Home = () => (
-  <div>
+  <Layout>
     <Head>
-      <title>Home</title>
+      <title>Sheboygan Lutheran CC | 2020 Clothing Order</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
-
-    <Nav />
-
-    <div className="hero">
-      <h1 className="title">Welcome to Next.js!</h1>
-      <p className="description">
-        To get started, edit <code>pages/index.js</code> and save to reload.
+    <Instructions>
+      <h2>2020 Cross Country Clothing Order</h2>
+      <p>
+        Use this form for your 2020 Sheboygan Lutheran Cross Country clothing
+        order. This site does <span>NOT</span> handle payment. You will need to
+        physicall turn in your cash or check to Coach Jurss.
       </p>
+      <h4>Add Items to Your Order:</h4>
+    </Instructions>
 
-      <div className="row">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Learn more about Next.js in the documentation.</p>
-        </a>
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Next.js Learn &rarr;</h3>
-          <p>Learn about Next.js by following an interactive tutorial!</p>
-        </a>
-        <a
-          href="https://github.com/zeit/next.js/tree/master/examples"
-          className="card"
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Find other example boilerplates on the Next.js GitHub.</p>
-        </a>
-      </div>
+    <div className={styles.list}>
+      <ShoppingItem />
+      <ShoppingItem />
+      <ShoppingItem />
     </div>
+    <div className={styles.footer}>
+      <div className={styles.total}>
+        <span>Subtotal:</span>$53.94
+      </div>
+      <Link href="/review-order">
+        <a className={styles.button}>
+          View Your Order
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+        </a>
+      </Link>
+    </div>
+  </Layout>
+);
 
-    <style jsx>{`
-      .hero {
-        width: 100%;
-        color: #333;
-      }
-      .title {
-        margin: 0;
-        width: 100%;
-        padding-top: 80px;
-        line-height: 1.15;
-        font-size: 48px;
-      }
-      .title,
-      .description {
-        text-align: center;
-      }
-      .row {
-        max-width: 880px;
-        margin: 80px auto 40px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
-      .card {
-        padding: 18px 18px 24px;
-        width: 220px;
-        text-align: left;
-        text-decoration: none;
-        color: #434343;
-        border: 1px solid #9b9b9b;
-      }
-      .card:hover {
-        border-color: #067df7;
-      }
-      .card h3 {
-        margin: 0;
-        color: #067df7;
-        font-size: 18px;
-      }
-      .card p {
-        margin: 0;
-        padding: 12px 0 0;
-        font-size: 13px;
-        color: #333;
-      }
-    `}</style>
-  </div>
-)
-
-export default Home
+export default Home;
