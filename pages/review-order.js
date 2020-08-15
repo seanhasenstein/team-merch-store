@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { OrderContext } from '../context/OrderContext';
 import Layout from '../components/Layout';
 import Instructions from '../components/Instructions';
 import ReviewItem from '../components/ReviewItem';
 import styles from '../styles/main.module.css';
 
 const ReviewOrder = () => {
+  const orderContext = useContext(OrderContext);
+
   return (
     <Layout>
       <Head>
@@ -44,7 +47,7 @@ const ReviewOrder = () => {
           </div>
           <div className={styles.footer}>
             <div className={styles.total}>
-              <span>Subtotal:</span> $80.00
+              <span>Subtotal:</span> ${orderContext.orderTotal.toFixed(2)}
             </div>
             <Link href="/submit-order">
               <a className={styles.button}>

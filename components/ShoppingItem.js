@@ -1,33 +1,78 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { OrderContext } from '../context/OrderContext';
 import styles from '../styles/item.module.css';
 
-const ShoppingItem = () => {
+const ShoppingItem = ({ item }) => {
+  const orderContext = useContext(OrderContext);
+  const [sku, setSku] = useState(undefined);
+  const [quantity, setQuantity] = useState(0);
+  const [total, setTotal] = useState(0);
+  useEffect(() => {
+    console.log({
+      order: orderContext.order,
+      orderTotal: orderContext.orderTotal,
+    });
+    if (isNaN(total)) {
+      setTotal(parseInt(0));
+      return;
+    }
+    if (quantity < 0) setQuantity(0);
+    if (sku === 'DEFAULT') setTotal(0);
+    if (sku && sku !== 'DEFAULT') {
+      const { price } = item.skus.find(element => sku === element.id);
+      setTotal((quantity * (price / 100)).toFixed(2));
+    }
+  }, [sku, quantity]);
+
+  const handleQtyChange = e => {
+    e.preventDefault();
+    setQuantity(e.target.value);
+  };
+
+  const handleDecrement = () => {
+    if (quantity === 0) {
+      setQuantity(0);
+      return;
+    }
+    setQuantity(quantity - 1);
+  };
+
+  const handleIncrement = () => {
+    const num = parseInt(quantity);
+    setQuantity(num + 1);
+  };
+
+  const handleAddToOrder = () => {
+    orderContext.addItemToOrder(item.id, sku, quantity, total);
+    // clear size and quantity
+  };
+
   return (
     <div className={styles.item}>
-      <img
-        className={styles.image}
-        src="/images/tshirt.png"
-        alt="Adult Dri-Fit T-Shirt"
-      />
+      <img className={styles.image} src={item.imgUrl} alt={item.primary} />
       <div className={styles.details}>
-        <h3>Dri-Fit T-Shirt</h3>
-        <p>Youth/Adult Sizes</p>
-        <p>$15.00</p>
+        <h3>{item.primary}</h3>
+        <p>{item.secondary}</p>
+        <p>${(item.price / 100).toFixed(2)}</p>
       </div>
       <div className={styles.size}>
-        <select className="form-select" name="size" id="size">
+        <select
+          className="form-select"
+          name="size"
+          id="size"
+          value={sku}
+          onChange={e => setSku(e.target.value)}
+        >
           <option value="DEFAULT">Select a Size</option>
-          <option value="YOUTH_XS">Youth XS</option>
-          <option value="YOUTH_SM">Youth SM</option>
-          <option value="ADULT_SM">Adult SM</option>
-          <option value="ADULT_MD">Adult MD</option>
-          <option value="ADULT_LG">Adult LG</option>
-          <option value="ADULT_XL">Adult XL</option>
-          <option value="ADULT_XXL">Adult XXL (+$2.00)</option>
+          {item.skus.map(sku => (
+            <option key={sku.id} value={sku.id}>
+              {sku.label}
+            </option>
+          ))}
         </select>
       </div>
       <div className={styles.quantity}>
-        <button>
+        <button onClick={handleDecrement}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -44,13 +89,14 @@ const ShoppingItem = () => {
           <label htmlFor="quantity">Qty.</label>
           <input
             className="form-input"
-            type="text"
-            value="0"
-            id="quanity"
-            name="quantity"
+            type="number"
+            value={quantity}
+            id={`quantity-${item.id}`}
+            name={`quantity-${item.id}`}
+            onChange={handleQtyChange}
           />
         </div>
-        <button>
+        <button onClick={handleIncrement}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -65,9 +111,10 @@ const ShoppingItem = () => {
         </button>
       </div>
       <div className={styles.total}>
-        <span>$</span>30.00
+        <span>$</span>
+        {total}
       </div>
-      <button className={styles.add}>
+      <button className={styles.add} onClick={handleAddToOrder}>
         Add to Order
         <svg
           xmlns="http://www.w3.org/2000/svg"
