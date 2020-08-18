@@ -1,4 +1,4 @@
-export const items = [
+export const products = [
   {
     id: 'i-1',
     primary: 'Dri-Fit T-Shirt',
@@ -173,19 +173,19 @@ export const items = [
     skus: [
       {
         id: 'i4-s0',
-        label: 'SM',
+        label: 'Small',
         value: 'SM',
         price: 2000,
       },
       {
         id: 'i4-s1',
-        label: 'MD',
+        label: 'Medium',
         value: 'MD',
         price: 2000,
       },
       {
         id: 'i4-s2',
-        label: 'LG',
+        label: 'Large',
         value: 'LG',
         price: 2000,
       },

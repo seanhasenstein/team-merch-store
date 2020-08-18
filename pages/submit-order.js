@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { OrderContext } from '../context/OrderContext';
 import Layout from '../components/Layout';
 import Instructions from '../components/Instructions';
 import SubmitItem from '../components/SubmitItem';
 import OrderForm from '../components/OrderForm';
+import { formatToMoney } from '../utils';
 import styles from '../styles/main.module.css';
 
 const SubmitOrder = () => {
+  const orderContext = useContext(OrderContext);
+  const { order, orderTotal } = orderContext;
   return (
     <Layout>
       <Head>
@@ -34,12 +38,15 @@ const SubmitOrder = () => {
       </Instructions>
       <div className={styles.submit}>
         <div className={styles.review}>
-          <SubmitItem />
-          <SubmitItem />
-          <SubmitItem />
+          {order.length < 1 ? (
+            <div className={styles.empty}>You have 0 items in your order.</div>
+          ) : (
+            order.map(item => <SubmitItem key={item.skuId} item={item} />)
+          )}
+
           <div className={`${styles.footer} ${styles.small}`}>
             <div className={styles.total}>
-              <span>Order Total:</span> $53.94
+              <span>Order Total:</span> ${formatToMoney(orderTotal)}
             </div>
           </div>
         </div>

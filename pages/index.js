@@ -5,12 +5,14 @@ import { OrderContext } from '../context/OrderContext';
 import Layout from '../components/Layout';
 import ShoppingItem from '../components/ShoppingItem';
 import Instructions from '../components/Instructions';
+import { formatToMoney } from '../utils';
 import styles from '../styles/main.module.css';
-import { items } from '../data';
 
 const Home = () => {
   const orderContext = useContext(OrderContext);
-  console.log(typeof orderContext.orderTotal, orderContext.orderTotal);
+  const { orderTotal } = orderContext;
+  const { products } = orderContext;
+
   return (
     <Layout>
       <Head>
@@ -28,13 +30,13 @@ const Home = () => {
       </Instructions>
 
       <div className={styles.list}>
-        {items.map(item => (
-          <ShoppingItem key={item.id} item={item} />
+        {products.map(product => (
+          <ShoppingItem key={product.id} product={product} />
         ))}
       </div>
       <div className={styles.footer}>
         <div className={styles.total}>
-          <span>Subtotal:</span>${orderContext.orderTotal.toFixed(2)}
+          <span>Subtotal:</span>${formatToMoney(orderTotal)}
         </div>
         <Link href="/review-order">
           <a className={styles.button}>

@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import { products } from '../data';
 
 const OrderContext = createContext();
 const { Provider } = OrderContext;
@@ -7,36 +8,116 @@ const OrderProvider = ({ children }) => {
   const [order, setOrder] = useState([]);
   const [orderTotal, setOrderTotal] = useState(0);
 
-  // [
-  // 	{
-  // 		itemId: 'i1',
-  // 		quantity: 1,
-  // 		sku: {
-  // 			id: 'i1-s0',
-  // 			label: 'Youth XS',
-  // 			price: 1500
-  // 		}
-  // 	}
-  // ]
+  useEffect(() => {
+    calcOrderTotal();
+  }, [order, orderTotal]);
 
-  const addItemToOrder = (itemId, skuId, quantity, itemTotal) => {
-    // check if itemId and skuId (size) is already in the order
-    // if yes => then only update the quantity,
-    // if no => then add the product to the order
-    setOrder([...order, { itemId, skuId, quantity, itemTotal }]);
-    console.log('itemTotal', typeof parseInt(itemTotal), parseInt(itemTotal));
-    setOrderTotal(orderTotal + parseInt(itemTotal));
+  const calcOrderTotal = () => {
+    let total = 0;
+    order.forEach(item => {
+      total += item.itemTotal;
+    });
+    setOrderTotal(total);
   };
 
-  const removeItemFromOrder = () => {};
+  const addItemToOrder = (itemId, skuId, quantity, itemTotal, pricePerItem) => {
+    // check if skuId already exists in the order
+    const dupItem = order.findIndex(orderItem => orderItem.skuId === skuId);
+
+    if (dupItem !== -1) {
+      const updatedOrder = [...order];
+      updatedOrder[dupItem].quantity =
+        updatedOrder[dupItem].quantity + quantity;
+      // need to update itemTotal in order[dupItem]
+      updatedOrder[dupItem].itemTotal =
+        updatedOrder[dupItem].itemTotal + quantity * pricePerItem;
+      setOrder(updatedOrder);
+      return;
+    }
+
+    // if not already in order then add as a new item
+    setOrder([...order, { itemId, skuId, quantity, itemTotal, pricePerItem }]);
+  };
+
+  const removeItemFromOrder = skuId => {
+    const indexToRemove = order.findIndex(item => item.skuId === skuId);
+    const updatedOrder = [...order];
+    updatedOrder.splice(indexToRemove, 1);
+    setOrder(updatedOrder);
+  };
+
+  const handleSkuChange = (item, newSku) => {
+    const { itemId, quantity } = item;
+    // check if newSku already in order
+    const index = order.findIndex(orderItem => orderItem.skuId === newSku);
+    // if index > -1 then an order item already exists with that newSku
+    if (index !== -1) {
+      const existingOrderItem = order[index];
+      const newQuantity = existingOrderItem.quantity + item.quantity;
+      const newItemTotal = newQuantity * existingOrderItem.pricePerItem;
+
+      const newItem = {
+        itemId,
+        skuId: newSku,
+        quantity: newQuantity,
+        itemTotal: newItemTotal,
+        pricePerItem: existingOrderItem.pricePerItem,
+      };
+
+      const updatedOrder = [...order];
+      // removes the old duplicate
+      updatedOrder.splice(index, 1, newItem);
+      // removes the old item from order
+      const indexToRemove = order.findIndex(
+        orderItem => orderItem.skuId === item.skuId,
+      );
+      updatedOrder.splice(indexToRemove, 1);
+      setOrder([...updatedOrder]);
+      return;
+    }
+    // if not then add new item with newSku to order
+    const product = products.find(product => product.id === item.itemId);
+    const newSkuItem = product.skus.find(sku => sku.id === newSku);
+    const newItemTotal = item.quantity * newSkuItem.price;
+    const newItem = {
+      itemId,
+      skuId: newSku,
+      quantity,
+      itemTotal: newItemTotal,
+      pricePerItem: newSkuItem.price,
+    };
+    // remove the old item from order
+    const indexToRemove = order.findIndex(
+      orderItem => orderItem.skuId === item.skuId,
+    );
+    const updatedOrder = [...order];
+    updatedOrder.splice(indexToRemove, 1, newItem);
+
+    setOrder([...updatedOrder]);
+  };
+
+  const handleQtyChange = (item, qty) => {
+    const updatedQty = parseInt(qty);
+    const updatedOrder = [...order];
+    const idx = updatedOrder.findIndex(
+      orderItem => orderItem.skuId === item.skuId,
+    );
+    updatedOrder[idx].quantity = updatedQty;
+    updatedOrder[idx].itemTotal = updatedQty * item.pricePerItem;
+
+    calcOrderTotal();
+  };
 
   return (
     <Provider
       value={{
+        products,
         order,
         orderTotal,
         addItemToOrder,
         removeItemFromOrder,
+        handleSkuChange,
+        handleQtyChange,
       }}
     >
       {children}

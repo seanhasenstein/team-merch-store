@@ -1,4 +1,5 @@
 .item {
+  position: relative;
   padding: 2.5rem 0;
   display: flex;
   justify-content: space-between;
@@ -114,6 +115,16 @@
   border-color: #8faef4;
 }
 
+.quantity label {
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
+}
+
+.quantity select {
+  padding-left: 1.25rem;
+}
+
 .total {
   min-width: 4.75rem;
   display: flex;
@@ -192,11 +203,21 @@
   border-color: #999ba6;
 }
 
+.error {
+  position: absolute;
+  bottom: 14px;
+  right: 0;
+  color: #c90005;
+  font-size: 0.875rem;
+  font-weight: 500;
+  width: 100%;
+  text-align: right;
+}
+
 @media (max-width: 1000px) {
   .item {
-    position: relative;
     width: calc(50% - 12px);
-    padding: 2.5rem 1.5rem;
+    padding: 2.5rem 1.5rem 4rem;
     margin: 0 0 2rem;
     flex-direction: column;
     align-items: center;
@@ -257,6 +278,11 @@
 
   .remove svg {
     display: none;
+  }
+
+  .error {
+    bottom: 24px;
+    text-align: center;
   }
 }
 

@@ -5,15 +5,17 @@ import { OrderContext } from '../context/OrderContext';
 import Layout from '../components/Layout';
 import Instructions from '../components/Instructions';
 import ReviewItem from '../components/ReviewItem';
+import { formatToMoney } from '../utils';
 import styles from '../styles/main.module.css';
 
 const ReviewOrder = () => {
   const orderContext = useContext(OrderContext);
+  const { order, orderTotal } = orderContext;
 
   return (
     <Layout>
       <Head>
-        <title>Review Order | Sheboygan Lutheran CC</title>
+        <title>Review Your Order | Sheboygan Lutheran CC</title>
       </Head>
       <div>
         <div>
@@ -38,16 +40,20 @@ const ReviewOrder = () => {
             <p>
               Make sure that your order is correct before continuing to submit.
             </p>
-            <h4>Your Order Items:</h4>
+            <h4>Order Items:</h4>
           </Instructions>
           <div className={styles.list}>
-            <ReviewItem />
-            <ReviewItem />
-            <ReviewItem />
+            {order.length < 1 ? (
+              <div className={styles.empty}>
+                You have 0 items in your order.
+              </div>
+            ) : (
+              order.map(item => <ReviewItem key={item.skuId} item={item} />)
+            )}
           </div>
           <div className={styles.footer}>
             <div className={styles.total}>
-              <span>Subtotal:</span> ${orderContext.orderTotal.toFixed(2)}
+              <span>Subtotal:</span> ${formatToMoney(orderTotal)}
             </div>
             <Link href="/submit-order">
               <a className={styles.button}>

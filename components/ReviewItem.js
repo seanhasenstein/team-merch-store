@@ -1,74 +1,74 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { OrderContext } from '../context/OrderContext';
+import { formatToMoney } from '../utils';
 import styles from '../styles/item.module.css';
 
-const ReviewItem = () => {
+const ReviewItem = ({ item }) => {
+  const [sku, setSku] = useState(item.skuId);
+  const orderContext = useContext(OrderContext);
+  const { handleQtyChange, handleSkuChange } = orderContext;
+  const product = orderContext.products.find(
+    product => item.itemId === product.id,
+  );
+
   return (
     <div className={styles.item}>
       <img
         className={styles.image}
-        src="/images/tshirt.png"
-        alt="Adult Dri-Fit T-Shirt"
+        src={product.imgUrl}
+        alt={product.primary}
       />
       <div className={styles.details}>
-        <h3>Dri-Fit T-Shirt</h3>
-        <p>Youth/Adult Sizes</p>
-        <p>$15.00</p>
+        <h3>{product.primary}</h3>
+        <p>{product.secondary}</p>
+        <p>${formatToMoney(item.pricePerItem)}</p>
       </div>
       <div className={styles.size}>
-        <select className="form-select" name="size" id="size">
-          <option value="DEFAULT">Select a Size</option>
-          <option value="YOUTH_XS">Youth XS</option>
-          <option value="YOUTH_SM">Youth SM</option>
-          <option value="ADULT_SM">Adult SM</option>
-          <option value="ADULT_MD">Adult MD</option>
-          <option value="ADULT_LG">Adult LG</option>
-          <option value="ADULT_XL">Adult XL</option>
-          <option value="ADULT_XXL">Adult XXL (+$2.00)</option>
+        <select
+          className="form-select"
+          name={`size-${product.id}`}
+          id={`size-${product.id}`}
+          value={item.skuId}
+          onChange={e => handleSkuChange(item, e.target.value)}
+        >
+          {product.skus.map(sku => (
+            <option key={sku.id} value={sku.id}>
+              {sku.label}
+            </option>
+          ))}
         </select>
       </div>
       <div className={styles.quantity}>
-        <button className={styles.button}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-        <div className={styles.form}>
-          <label for="quantity">Qty.</label>
-          <input
-            className="form-input"
-            type="text"
-            value="0"
-            id="quanity"
-            name="quantity"
-          />
-        </div>
-        <button className={styles.button}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
+        <label htmlFor={`quantity-${sku}`}>Qty:</label>
+        <select
+          className="form-select"
+          type="text"
+          name={`quantity-${sku}`}
+          id={`quantity-${sku}`}
+          value={item.quantity}
+          onChange={e => handleQtyChange(item, e.target.value)}
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
       </div>
       <div className={styles.total}>
-        <span>$</span>30.00
+        <span>$</span>
+        {formatToMoney(item.itemTotal)}
       </div>
 
-      <button className={styles.remove}>
+      <button
+        className={styles.remove}
+        onClick={() => orderContext.removeItemFromOrder(item.skuId)}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"

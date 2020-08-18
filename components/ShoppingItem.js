@@ -1,26 +1,25 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { OrderContext } from '../context/OrderContext';
+import { formatToMoney } from '../utils';
 import styles from '../styles/item.module.css';
 
-const ShoppingItem = ({ item }) => {
+const ShoppingItem = ({ product }) => {
   const orderContext = useContext(OrderContext);
   const [sku, setSku] = useState(undefined);
   const [quantity, setQuantity] = useState(0);
   const [total, setTotal] = useState(0);
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
   useEffect(() => {
-    console.log({
-      order: orderContext.order,
-      orderTotal: orderContext.orderTotal,
-    });
     if (isNaN(total)) {
       setTotal(parseInt(0));
       return;
     }
     if (quantity < 0) setQuantity(0);
     if (sku === 'DEFAULT') setTotal(0);
-    if (sku && sku !== 'DEFAULT') {
-      const { price } = item.skus.find(element => sku === element.id);
-      setTotal((quantity * (price / 100)).toFixed(2));
+    if (sku && sku !== 'DEFAULT' && quantity !== 0) {
+      const { price } = product.skus.find(element => sku === element.id);
+      setTotal(quantity * price);
     }
   }, [sku, quantity]);
 
@@ -43,17 +42,29 @@ const ShoppingItem = ({ item }) => {
   };
 
   const handleAddToOrder = () => {
-    orderContext.addItemToOrder(item.id, sku, quantity, total);
-    // clear size and quantity
+    setErrorMessage('');
+    if (!sku || !quantity) {
+      setErrorMessage('Must include both a size and quantity.');
+      return;
+    }
+    const { price } = product.skus.find(element => sku === element.id);
+    orderContext.addItemToOrder(product.id, sku, quantity, total, price);
+
+    setQuantity(0);
+    setSku('DEFAULT');
   };
 
   return (
     <div className={styles.item}>
-      <img className={styles.image} src={item.imgUrl} alt={item.primary} />
+      <img
+        className={styles.image}
+        src={product.imgUrl}
+        alt={product.primary}
+      />
       <div className={styles.details}>
-        <h3>{item.primary}</h3>
-        <p>{item.secondary}</p>
-        <p>${(item.price / 100).toFixed(2)}</p>
+        <h3>{product.primary}</h3>
+        <p>{product.secondary}</p>
+        <p>${formatToMoney(product.price)}</p>
       </div>
       <div className={styles.size}>
         <select
@@ -64,7 +75,7 @@ const ShoppingItem = ({ item }) => {
           onChange={e => setSku(e.target.value)}
         >
           <option value="DEFAULT">Select a Size</option>
-          {item.skus.map(sku => (
+          {product.skus.map(sku => (
             <option key={sku.id} value={sku.id}>
               {sku.label}
             </option>
@@ -91,8 +102,8 @@ const ShoppingItem = ({ item }) => {
             className="form-input"
             type="number"
             value={quantity}
-            id={`quantity-${item.id}`}
-            name={`quantity-${item.id}`}
+            id={`quantity-${product.id}`}
+            name={`quantity-${product.id}`}
             onChange={handleQtyChange}
           />
         </div>
@@ -112,7 +123,7 @@ const ShoppingItem = ({ item }) => {
       </div>
       <div className={styles.total}>
         <span>$</span>
-        {total}
+        {formatToMoney(total)}
       </div>
       <button className={styles.add} onClick={handleAddToOrder}>
         Add to Order
@@ -128,6 +139,7 @@ const ShoppingItem = ({ item }) => {
           />
         </svg>
       </button>
+      {errorMessage ? <div className={styles.error}>{errorMessage}</div> : null}
     </div>
   );
 };

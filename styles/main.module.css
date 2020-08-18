@@ -126,6 +126,11 @@
   border-color: #2f62d0;
 }
 
+.empty {
+  padding: 1.25rem 0 2rem;
+  border-bottom: 2px solid #dbdee2;
+}
+
 @media (max-width: 1000px) {
   .list {
     display: flex;

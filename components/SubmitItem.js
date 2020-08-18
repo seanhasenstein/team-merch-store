@@ -1,21 +1,31 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { OrderContext } from '../context/OrderContext';
+import { formatToMoney } from '../utils';
 import styles from '../styles/submit-item.module.css';
 
-const SubmitItem = () => {
+const SubmitItem = ({ item }) => {
+  const orderContext = useContext(OrderContext);
+  const product = orderContext.products.find(
+    product => item.itemId === product.id,
+  );
+  const sku = product.skus.find(sku => item.skuId === sku.id);
+
   return (
     <div className={styles.item}>
       <div className={styles.image}>
-        <img src="/images/tshirt.png" alt="Adult Dri-Fit T-Shirt" />
+        <img src={product.imgUrl} alt={product.primary} />
       </div>
       <div className={styles.details}>
-        <h3>Women's Dri-Fit Hoodie</h3>
-        <p>Adult XL</p>
+        <h3>{product.primary}</h3>
+        <p>{sku.label}</p>
       </div>
       <div className={styles.quantity}>
-        <span>Qty:</span>1
+        <span>Qty:</span>
+        {item.quantity}
       </div>
       <div className={styles.total}>
-        <span>$</span>35.00
+        <span>$</span>
+        {formatToMoney(item.itemTotal)}
       </div>
     </div>
   );
