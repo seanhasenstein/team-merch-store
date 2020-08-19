@@ -1,12 +1,20 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { products } from '../data';
 
+// TODO: convert from useState to useReducer
+
 const OrderContext = createContext();
 const { Provider } = OrderContext;
 
 const OrderProvider = ({ children }) => {
   const [order, setOrder] = useState([]);
   const [orderTotal, setOrderTotal] = useState(0);
+
+  useEffect(() => {
+    const initialOrderState =
+      JSON.parse(localStorage.getItem('order_items')) || [];
+    setOrder(initialOrderState);
+  }, []);
 
   useEffect(() => {
     calcOrderTotal();
@@ -32,11 +40,17 @@ const OrderProvider = ({ children }) => {
       updatedOrder[dupItem].itemTotal =
         updatedOrder[dupItem].itemTotal + quantity * pricePerItem;
       setOrder(updatedOrder);
+      localStorage.setItem('order_items', JSON.stringify(updatedOrder));
       return;
     }
 
     // if not already in order then add as a new item
-    setOrder([...order, { itemId, skuId, quantity, itemTotal, pricePerItem }]);
+    const updatedOrder = [
+      ...order,
+      { itemId, skuId, quantity, itemTotal, pricePerItem },
+    ];
+    setOrder(updatedOrder);
+    localStorage.setItem('order_items', JSON.stringify(updatedOrder));
   };
 
   const removeItemFromOrder = skuId => {
@@ -44,9 +58,11 @@ const OrderProvider = ({ children }) => {
     const updatedOrder = [...order];
     updatedOrder.splice(indexToRemove, 1);
     setOrder(updatedOrder);
+    localStorage.setItem('order_items', JSON.stringify(updatedOrder));
   };
 
   const handleSkuChange = (item, newSku) => {
+    // TODO: refactor with an else statement and make addToOrder DRY
     const { itemId, quantity } = item;
     // check if newSku already in order
     const index = order.findIndex(orderItem => orderItem.skuId === newSku);
@@ -73,6 +89,7 @@ const OrderProvider = ({ children }) => {
       );
       updatedOrder.splice(indexToRemove, 1);
       setOrder([...updatedOrder]);
+      localStorage.setItem('order_items', JSON.stringify(updatedOrder));
       return;
     }
     // if not then add new item with newSku to order
@@ -94,16 +111,26 @@ const OrderProvider = ({ children }) => {
     updatedOrder.splice(indexToRemove, 1, newItem);
 
     setOrder([...updatedOrder]);
+    localStorage.setItem('order_items', JSON.stringify(updatedOrder));
   };
 
   const handleQtyChange = (item, qty) => {
+    const { itemId, skuId, pricePerItem } = item;
     const updatedQty = parseInt(qty);
     const updatedOrder = [...order];
-    const idx = updatedOrder.findIndex(
+    const idxToChange = updatedOrder.findIndex(
       orderItem => orderItem.skuId === item.skuId,
     );
-    updatedOrder[idx].quantity = updatedQty;
-    updatedOrder[idx].itemTotal = updatedQty * item.pricePerItem;
+    const newItem = {
+      itemId,
+      skuId,
+      quantity: updatedQty,
+      itemTotal: updatedQty * pricePerItem,
+      pricePerItem,
+    };
+    updatedOrder[idxToChange] = newItem;
+    setOrder(updatedOrder);
+    localStorage.setItem('order_items', JSON.stringify(updatedOrder));
 
     calcOrderTotal();
   };
