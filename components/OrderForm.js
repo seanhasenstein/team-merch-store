@@ -34,10 +34,8 @@ const reducer = (state, action) => {
 
 const OrderForm = () => {
   const orderContext = useContext(OrderContext);
-  const { order } = orderContext;
+  const { orderItems } = orderContext;
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-
-  console.log(order);
 
   const updateFieldValue = field => event => {
     dispatch({
@@ -96,11 +94,12 @@ const OrderForm = () => {
 
     if (state.honeypot) return;
 
-    if (order.length === 0) {
+    if (orderItems.length === 0) {
       updateErrorValue(
         'formError',
         'You must have at least 1 in your order to submit.',
       );
+
       return;
     }
 
@@ -108,11 +107,25 @@ const OrderForm = () => {
 
     if (isValid) {
       updateStatus('PENDING');
-      // try {
-      //   // TODO: SEND THE API REQUEST
-      // } catch(error) {
-      //   updateStatus('ERROR')
-      // }
+
+      const { firstName, lastName, student, email, phone } = state;
+
+      fetch('/api/submit', {
+        method: 'POST',
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          student,
+          email,
+          phone,
+          orderItems,
+        }),
+      })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
+
+      updateStatus('SUCCESS');
 
       console.log('FORM SUBMISSION!', { state });
     }

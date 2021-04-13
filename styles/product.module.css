@@ -1,0 +1,131 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 424px);
+}
+
+.row {
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.image {
+  padding: 2rem;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 0.125rem;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.image img {
+  max-width: 250px;
+  width: 100%;
+}
+
+.details {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.item-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+  text-align: right;
+}
+
+.price {
+  margin: 0;
+  font-size: 1rem;
+  color: #059669;
+}
+
+.form {
+  margin: 2rem 0 0;
+  max-width: 300px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.size {
+  margin: 1rem 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin: 0 0 0.25rem;
+  font-weight: 500;
+  color: #6e788c;
+}
+
+.select {
+  padding: 0 14px;
+  height: 48px;
+  width: 100%;
+  font-weight: 500;
+  line-height: 1.25rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.25px;
+  color: #36383e;
+}
+
+.button {
+  margin: 1rem 0 0;
+  padding: 0.875rem 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #484a52; */
+  background-color: #3a3f4a;
+  color: #f3f4f5;
+  font-family: 'Gotham Rounded', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.75px;
+  border: 2px solid transparent;
+}
+
+.button:hover {
+  background-color: #31363f;
+  border-color: #484a52;
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(149, 152, 162, 0.35);
+  border-color: #303137;
+}
+
+@media (max-width: 800px) {
+  .row {
+    padding: 0 1.25rem;
+    flex-direction: column;
+  }
+
+  .image {
+    width: 100%;
+  }
+
+  .details {
+    margin: 2rem 0 0;
+    width: 100%;
+    align-items: center;
+  }
+
+  .item-title,
+  .price {
+    text-align: center;
+  }
+}

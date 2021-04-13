@@ -10,7 +10,7 @@ import styles from '../styles/main.module.css';
 
 const ReviewOrder = () => {
   const orderContext = useContext(OrderContext);
-  const { order, orderTotal } = orderContext;
+  const { orderItems, orderTotal } = orderContext;
 
   return (
     <Layout>
@@ -19,7 +19,7 @@ const ReviewOrder = () => {
       </Head>
       <div>
         <div>
-          <Link href="/">
+          {/* <Link href="/">
             <a className={styles.back}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -34,21 +34,23 @@ const ReviewOrder = () => {
               </svg>
               Back to Shopping
             </a>
-          </Link>
+          </Link> */}
           <Instructions>
-            <h3>Review Your Order</h3>
+            <h3>Your Order</h3>
             <p>
-              Make sure that your order is correct before continuing to submit.
+              Confirm that your order is correct before continuing to checkout.
             </p>
             <h4>Order Items:</h4>
           </Instructions>
           <div className={styles.list}>
-            {order.length < 1 ? (
+            {orderItems.length < 1 ? (
               <div className={styles.empty}>
                 You have 0 items in your order.
               </div>
             ) : (
-              order.map(item => <ReviewItem key={item.skuId} item={item} />)
+              orderItems.map(item => (
+                <ReviewItem key={item.skuId} item={item} />
+              ))
             )}
           </div>
           <div className={styles.footer}>
@@ -57,7 +59,7 @@ const ReviewOrder = () => {
             </div>
             <Link href="/submit-order">
               <a className={styles.button}>
-                Go to Submit Order
+                Go to checkout
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

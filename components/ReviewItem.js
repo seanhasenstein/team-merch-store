@@ -6,9 +6,9 @@ import styles from '../styles/item.module.css';
 const ReviewItem = ({ item }) => {
   const [sku, setSku] = useState(item.skuId);
   const orderContext = useContext(OrderContext);
-  const { handleQtyChange, handleSkuChange } = orderContext;
+  const { updateOrder, updateSku, removeItem } = orderContext;
   const product = orderContext.products.find(
-    product => item.itemId === product.id,
+    product => item.productId === product.id,
   );
 
   return (
@@ -21,15 +21,16 @@ const ReviewItem = ({ item }) => {
       <div className={styles.details}>
         <h3>{product.primary}</h3>
         <p>{product.secondary}</p>
-        <p>${formatToMoney(item.pricePerItem)}</p>
+        <p>${formatToMoney(item.price)}</p>
       </div>
       <div className={styles.size}>
+        <label htmlFor="size">Size</label>
         <select
           className="form-select"
           name={`size-${product.id}`}
           id={`size-${product.id}`}
           value={item.skuId}
-          onChange={e => handleSkuChange(item, e.target.value)}
+          onChange={e => updateSku(item, e.target.value)}
         >
           {product.skus.map(sku => (
             <option key={sku.id} value={sku.id}>
@@ -46,7 +47,9 @@ const ReviewItem = ({ item }) => {
           name={`quantity-${sku}`}
           id={`quantity-${sku}`}
           value={item.quantity}
-          onChange={e => handleQtyChange(item, e.target.value)}
+          onChange={e =>
+            updateOrder(item.productId, item.skuId, e.target.value, item.price)
+          }
         >
           <option value="1">1</option>
           <option value="2">2</option>
@@ -62,13 +65,10 @@ const ReviewItem = ({ item }) => {
       </div>
       <div className={styles.total}>
         <span>$</span>
-        {formatToMoney(item.itemTotal)}
+        {formatToMoney(item.quantity * item.price)}
       </div>
 
-      <button
-        className={styles.remove}
-        onClick={() => orderContext.removeItemFromOrder(item.skuId)}
-      >
+      <button className={styles.remove} onClick={() => removeItem(item.skuId)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"

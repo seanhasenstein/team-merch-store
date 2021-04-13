@@ -1,22 +1,24 @@
 .bg {
-  width: calc(100% - 48px);
-  margin: 1.5rem auto;
-  padding: 0 3rem;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
   background-color: #f1f2f4;
-  border-radius: 8px;
-  border: 2px solid #ebebeb;
 }
 
 .container {
-  position: relative;
-  max-width: 1024px;
   margin: 0 auto;
+  padding: 0 0 226px;
+  max-width: 900px;
+  width: 100%;
 }
 
 .header {
-  padding: 1.5rem 0;
-  margin: 0 0 3rem;
-  border-bottom: 2px solid #dbdee2;
+  margin: 0 0 5rem;
+  padding: 1rem 3rem;
+  position: relative;
+  background-color: #fcfcfd;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 }
 
 .logo {
@@ -26,13 +28,40 @@
 }
 
 .logo img {
-  width: 42px;
+  width: 40px;
+}
+
+.stores-link {
+  position: absolute;
+  left: 2rem;
+  top: 26px;
+}
+
+.nav {
+  position: absolute;
+  right: 2rem;
+  top: 26px;
+}
+
+.stores-link svg,
+.nav-item svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  color: #545c6b;
+}
+
+.stores-link:hover svg,
+.nav-item:hover svg {
+  color: #181a1e;
 }
 
 .footer {
   margin: 5rem auto 0;
-  padding: 3rem 0;
-  width: 100%;
+  padding: 2rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,8 +69,8 @@
 }
 
 .footer img {
-  margin-bottom: 1.25rem;
-  width: 1.875rem;
+  margin-bottom: 0.25rem;
+  width: 1.75rem;
 }
 
 .footer p {
@@ -52,10 +81,8 @@
   text-align: center;
 }
 
-@media (max-width: 1000px) {
-  .bg {
-    width: 100%;
-    margin: 0;
-    padding: 0 1.5rem;
+@media (max-width: 800px) {
+  .header {
+    margin: 0 0 1.25rem;
   }
 }

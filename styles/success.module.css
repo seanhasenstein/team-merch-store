@@ -3,7 +3,7 @@
   max-width: 920px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 }
 
 .info > div {
@@ -30,6 +30,10 @@
   margin: 0 0 1.625rem;
   font-size: 1rem;
   font-weight: 500;
+}
+
+.items h3 {
+  margin-top: 4.5rem;
 }
 
 .item {
@@ -127,9 +131,9 @@
     padding: 4rem 0 0;
   }
 
-  .items > h3 {
+  /* .items > h3 {
     margin-top: 4rem;
-  }
+  } */
 }
 
 @media (max-width: 425px) {

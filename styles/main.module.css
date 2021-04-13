@@ -68,10 +68,9 @@
 }
 
 .total span {
-  margin-right: 0.5rem;
-  color: #bdbdc7;
+  margin-right: 0.25rem;
+  color: #6e788c;
   font-size: 1rem;
-  letter-spacing: 0.5px;
 }
 
 .footer.small {

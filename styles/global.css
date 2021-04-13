@@ -21,6 +21,7 @@ body {
   font-size: 16px;
   margin: 0;
   padding: 0;
+  background-color: #f1f2f4;
 }
 
 *,
@@ -62,7 +63,9 @@ button {
   cursor: pointer;
 }
 
-.form-input {
+.form-input,
+input,
+select {
   appearance: none;
   background-color: #fff;
   border: 2px solid #dddde2;
@@ -85,7 +88,8 @@ input[type='number']::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.form-select {
+.form-select,
+select {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%239fa6b2' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   appearance: none;
   color-adjust: exact;
@@ -100,6 +104,7 @@ input[type='number']::-webkit-outer-spin-button {
   background-position: right 0.5rem center;
   background-size: 1.5em 1.5em;
   height: 48px;
+  cursor: pointer;
 }
 
 select:focus {

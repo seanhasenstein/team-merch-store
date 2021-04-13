@@ -3,7 +3,7 @@ import { OrderContext } from '../context/OrderContext';
 import { formatToMoney } from '../utils';
 import styles from '../styles/item.module.css';
 
-const ShoppingItem = ({ product }) => {
+const ShoppingItem = ({ product, setSidebar }) => {
   const orderContext = useContext(OrderContext);
   const [sku, setSku] = useState(undefined);
   const [quantity, setQuantity] = useState(0);
@@ -48,10 +48,16 @@ const ShoppingItem = ({ product }) => {
       return;
     }
     const { price } = product.skus.find(element => sku === element.id);
-    orderContext.addItemToOrder(product.id, sku, quantity, total, price);
+    orderContext.updateOrder(product.id, sku, quantity, price);
 
     setQuantity(0);
     setSku('DEFAULT');
+
+    setSidebar(true);
+
+    // setTimeout(() => {
+    //   setSidebar(false);
+    // }, 5000);
   };
 
   return (

@@ -1,7 +1,7 @@
 .instructions h2,
 .instructions h3 {
-  margin: 0 0 1.25rem;
-  font-size: 1.25rem;
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
   font-weight: 500;
   line-height: 1.25;
 }
@@ -15,8 +15,8 @@
 .instructions p {
   margin: 0;
   max-width: 600px;
-  font-size: 0.875rem;
-  color: #576366;
+  font-size: 1rem;
+  color: #6e788c;
   line-height: 1.75;
 }
 

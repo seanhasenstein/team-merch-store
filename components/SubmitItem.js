@@ -6,7 +6,7 @@ import styles from '../styles/submit-item.module.css';
 const SubmitItem = ({ item }) => {
   const orderContext = useContext(OrderContext);
   const product = orderContext.products.find(
-    product => item.itemId === product.id,
+    product => item.productId === product.id,
   );
   const sku = product.skus.find(sku => item.skuId === sku.id);
 
@@ -25,7 +25,7 @@ const SubmitItem = ({ item }) => {
       </div>
       <div className={styles.total}>
         <span>$</span>
-        {formatToMoney(item.itemTotal)}
+        {formatToMoney(item.price * item.quantity)}
       </div>
     </div>
   );

@@ -1,0 +1,108 @@
+.container {
+  width: 100%;
+}
+
+.page-title,
+.page-description {
+  text-align: center;
+}
+
+.page-title {
+  margin: 0 auto 1rem;
+}
+
+.page-description {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.items {
+  margin: 5rem 0 0;
+  display: grid;
+  /* grid-template-columns: repeat(3, 33.3333%); */
+  grid-template-columns: repeat(auto-fill, minmax(284px, 1fr));
+  gap: 1.5rem;
+}
+
+.item {
+  margin: 0 0 3rem;
+  width: 100%;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:hover .img img {
+  transform: scale(1.03);
+}
+
+.img {
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #fcfcfc;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+}
+
+.img img {
+  max-width: 200px;
+  width: 100%;
+  height: 100%;
+  transition: transform 150ms ease-in-out;
+}
+
+.details {
+  padding: 1rem 0;
+}
+
+.primary,
+.secondary {
+  margin: 0 0 0.24rem;
+  line-height: 1.25;
+}
+
+.primary {
+  font-size: 1rem;
+  color: #36383e;
+}
+
+.secondary {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #9393a3;
+}
+
+.price {
+  margin: 1.25rem 0 0;
+  color: #36383e;
+}
+
+@media (max-width: 800px) {
+  .container {
+    margin: 3rem 0 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .page-title,
+  .page-description {
+    padding: 0 1.25rem;
+  }
+
+  .items {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .details {
+    padding: 1rem 0.75rem;
+  }
+
+  .primary,
+  .secondary,
+  .price {
+    font-size: 0.875rem;
+  }
+}
