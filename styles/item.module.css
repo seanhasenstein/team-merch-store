@@ -1,6 +1,6 @@
 .item {
   position: relative;
-  padding: 2rem 0;
+  padding: 1.5rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -33,14 +33,16 @@
   color: #6e788c;
 }
 
+.inputs {
+  display: grid;
+  grid-template-columns: 9.5rem 5rem;
+  gap: 1rem;
+}
+
 .size,
 .quantity {
   display: flex;
   flex-direction: column;
-}
-
-.size {
-  width: 9.375rem;
 }
 
 .size select {
@@ -49,16 +51,10 @@
   width: 100%;
   font-weight: 500;
   line-height: 1.25rem;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.25px;
   color: #36383e;
 }
-
-/* .quantity {
-  display: flex;
-  align-items: center;
-  position: relative;
-} */
 
 .form {
   position: relative;
@@ -125,16 +121,13 @@
 .size label,
 .quantity label {
   margin: 0 0 0.25rem;
+  font-size: 0.8125rem;
   color: #6e788c;
-  /* position: absolute; */
-  /* top: -1.375rem; */
-  /* font-size: 0.75rem; */
-  /* letter-spacing: 0.5px; */
 }
 
 .quantity select {
   padding-left: 1.25rem;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
 }
 
 .total {
@@ -147,9 +140,13 @@
   letter-spacing: 0.25px;
 }
 
+.total-label {
+  display: none;
+}
+
 .total span {
-  margin-top: -3px;
-  margin-right: 2px;
+  margin-top: -2px;
+  margin-right: 1px;
   font-size: 0.875rem;
 }
 
@@ -226,7 +223,73 @@
   text-align: right;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 768px) {
+  .item {
+    margin: 0 0 1.25rem;
+    padding: 3rem 0;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  }
+
+  .image {
+    width: 7rem;
+  }
+
+  .details {
+    margin: 1.25rem 0;
+    max-width: unset;
+    align-items: center;
+  }
+
+  .price {
+    display: none;
+  }
+
+  /* .size select,
+  .quantity select {
+    font-size: 1rem;
+  } */
+
+  .total {
+    margin: 2rem 0 0;
+  }
+
+  .total-label {
+    margin: 0 1rem 0 0;
+    display: inline-block;
+  }
+
+  .total span {
+    margin: 0;
+    font-size: inherit;
+  }
+
+  .remove {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.875rem;
+  }
+
+  .remove svg {
+    flex-shrink: 0;
+    color: #babfc9;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+
+  /* .remove span {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #babfc9;
+  } */
+}
+
+/* @media (max-width: 900px) {
   .item {
     width: calc(50% - 12px);
     padding: 2.5rem 1.5rem 4rem;
@@ -296,10 +359,4 @@
     bottom: 24px;
     text-align: center;
   }
-}
-
-@media (max-width: 600px) {
-  .item {
-    width: 100%;
-  }
-}
+} */

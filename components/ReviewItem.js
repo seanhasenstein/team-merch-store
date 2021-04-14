@@ -21,49 +21,57 @@ const ReviewItem = ({ item }) => {
       <div className={styles.details}>
         <h3>{product.primary}</h3>
         <p>{product.secondary}</p>
-        <p>${formatToMoney(item.price)}</p>
+        <p className={styles.price}>${formatToMoney(item.price)}</p>
       </div>
-      <div className={styles.size}>
-        <label htmlFor="size">Size</label>
-        <select
-          className="form-select"
-          name={`size-${product.id}`}
-          id={`size-${product.id}`}
-          value={item.skuId}
-          onChange={e => updateSku(item, e.target.value)}
-        >
-          {product.skus.map(sku => (
-            <option key={sku.id} value={sku.id}>
-              {sku.label}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className={styles.quantity}>
-        <label htmlFor={`quantity-${sku}`}>Qty:</label>
-        <select
-          className="form-select"
-          type="text"
-          name={`quantity-${sku}`}
-          id={`quantity-${sku}`}
-          value={item.quantity}
-          onChange={e =>
-            updateOrder(item.productId, item.skuId, e.target.value, item.price)
-          }
-        >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
+      <div className={styles.inputs}>
+        <div className={styles.size}>
+          <label htmlFor="size">Size</label>
+          <select
+            className="form-select"
+            name={`size-${product.id}`}
+            id={`size-${product.id}`}
+            value={item.skuId}
+            onChange={e => updateSku(item, e.target.value)}
+          >
+            {product.skus.map(sku => (
+              <option key={sku.id} value={sku.id}>
+                {sku.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className={styles.quantity}>
+          <label htmlFor={`quantity-${sku}`}>Qty:</label>
+          <select
+            className="form-select"
+            type="text"
+            name={`quantity-${sku}`}
+            id={`quantity-${sku}`}
+            value={item.quantity}
+            onChange={e =>
+              updateOrder(
+                item.productId,
+                item.skuId,
+                e.target.value,
+                item.price,
+              )
+            }
+          >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
       </div>
       <div className={styles.total}>
+        <div className={styles['total-label']}>Item Total:</div>
         <span>$</span>
         {formatToMoney(item.quantity * item.price)}
       </div>

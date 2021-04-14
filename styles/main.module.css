@@ -89,13 +89,14 @@
 
 .button {
   margin: 1.5rem 0 0;
-  padding: 0.75rem 1.5rem 0.625rem;
+  padding: 0.875rem 1.5rem;
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: #3f6ed4;
   font-family: 'Gotham Rounded', sans-serif;
   font-size: 0.875rem;
-  font-weight: 400;
+  font-weight: 500;
   color: #fff;
   letter-spacing: 0.75px;
   border-radius: 6px;
@@ -130,15 +131,42 @@
   border-bottom: 2px solid #dbdee2;
 }
 
-@media (max-width: 1000px) {
-  .list {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
+.order-details {
+  display: none;
+}
 
-  .footer.small {
-    padding-right: 2rem;
+.summary {
+  margin: 3rem 0 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.summary-container {
+  max-width: 300px;
+  width: 100%;
+}
+
+.summary h4 {
+  margin: 0 0 1.25rem;
+  font-size: 1.125rem;
+}
+
+.summary-item {
+  padding: 0.25rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.summary-total {
+  margin: 0.75rem 0 0;
+  padding: 0.875rem 0 0.25rem;
+  font-weight: 500;
+  border-top: 1px solid #dbdee2;
+}
+
+@media (max-width: 940px) {
+  .cart {
+    padding: 0 1.25rem;
   }
 }
 
@@ -156,5 +184,22 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 2rem 0 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .order-details {
+    margin: 1rem 0 3rem;
+    display: flex;
+    justify-content: center;
+    color: #6e788c;
+  }
+
+  .summary-container {
+    max-width: unset;
+  }
+
+  .summary-total {
+    border: none;
   }
 }

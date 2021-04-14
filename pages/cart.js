@@ -15,68 +15,79 @@ const ReviewOrder = () => {
   return (
     <Layout>
       <Head>
-        <title>Review Your Order | Sheboygan Lutheran CC</title>
+        <title>Cart | 2021 Track &amp; Field Apparel Order</title>
       </Head>
-      <div>
-        <div>
-          {/* <Link href="/">
-            <a className={styles.back}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              Back to Shopping
-            </a>
-          </Link> */}
-          <Instructions>
-            <h3>Your Order</h3>
-            <p>
-              Confirm that your order is correct before continuing to checkout.
-            </p>
-            <h4>Order Items:</h4>
-          </Instructions>
-          <div className={styles.list}>
-            {orderItems.length < 1 ? (
-              <div className={styles.empty}>
-                You have 0 items in your order.
-              </div>
-            ) : (
-              orderItems.map(item => (
-                <ReviewItem key={item.skuId} item={item} />
-              ))
-            )}
+      <div className={styles.cart}>
+        <Instructions>
+          <h3>Your Order</h3>
+          <p>
+            Confirm that your order is correct before continuing to checkout.
+          </p>
+          <h4>Order Items:</h4>
+          <div className={styles['order-details']}>
+            3 Items | ${formatToMoney(orderTotal)}
           </div>
-          <div className={styles.footer}>
-            <div className={styles.total}>
-              <span>Subtotal:</span> ${formatToMoney(orderTotal)}
+        </Instructions>
+        <div className={styles.list}>
+          {orderItems.length < 1 ? (
+            <div className={styles.empty}>You have 0 items in your order.</div>
+          ) : (
+            orderItems.map(item => <ReviewItem key={item.skuId} item={item} />)
+          )}
+        </div>
+        <div className={styles.summary}>
+          <div className={styles['summary-container']}>
+            <h4>Summary:</h4>
+            <div className={styles['summary-items']}>
+              <div className={styles['summary-item']}>
+                <div className={styles['summary-title']}>Subtotal</div>
+                <div className={styles['summary-data']}>
+                  ${formatToMoney(orderTotal)}
+                </div>
+              </div>
+              <div className={styles['summary-item']}>
+                <div className={styles['summary-title']}>Transaction Fee</div>
+                <div className={styles['summary-data']}>
+                  ${formatToMoney(orderTotal * 0.029 + 30)}
+                </div>
+              </div>
+              <div
+                className={`${styles['summary-item']} ${styles['summary-total']}`}
+              >
+                <div className={styles['summary-title']}>Total</div>
+                <div className={styles['summary-data']}>
+                  ${formatToMoney(orderTotal + (orderTotal * 0.029 + 0.3))}
+                </div>
+              </div>
             </div>
             <Link href="/submit-order">
-              <a className={styles.button}>
-                Go to checkout
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </a>
+              <a className={styles.button}>Go to Checkout</a>
             </Link>
           </div>
         </div>
+        {/* <div className={styles.footer}>
+          <div className={styles.total}>
+            <span>Subtotal:</span> ${formatToMoney(orderTotal)}
+          </div>
+          <Link href="/submit-order">
+            <a className={styles.button}>
+              Go to checkout
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
+          </Link>
+        </div> */}
       </div>
     </Layout>
   );
