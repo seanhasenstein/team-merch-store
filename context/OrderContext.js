@@ -32,12 +32,12 @@ const reducer = (state, action) => {
       };
     }
     case 'UPDATE_ORDER': {
-      const { productId, skuId, quantity, price } = action.payload;
+      const { productId, slug, skuId, quantity, price } = action.payload;
       const updatedOrderItems = state.orderItems.filter(i => i.skuId !== skuId);
       // TODO: I think I need to add old item + new item if same skuId exists
       const orderItems = [
         ...updatedOrderItems,
-        { productId, skuId, quantity, price },
+        { productId, slug, skuId, quantity, price },
       ];
       if (typeof window !== 'undefined') {
         localStorage.setItem('order_items', JSON.stringify(orderItems));
@@ -117,11 +117,12 @@ const OrderProvider = ({ children }) => {
     });
   }, [state.orderItems]);
 
-  const updateOrder = (productId, skuId, quantity, price) => {
+  const updateOrder = (productId, slug, skuId, quantity, price) => {
     dispatch({
       type: 'UPDATE_ORDER',
       payload: {
         productId,
+        slug,
         skuId,
         quantity,
         price,

@@ -3,12 +3,31 @@ import PropTypes from 'prop-types';
 import { OrderContext } from '../../../context/OrderContext';
 import { products } from '../../../data';
 import Layout from '../../../components/Layout';
+import ProductSidebar from '../../../components/ProductSidebar';
 import { formatToMoney } from '../../../utils';
 import styles from '../../../styles/product.module.css';
 
 export default function Product({ item }) {
   const { updateOrder } = React.useContext(OrderContext);
   const [sku, setSku] = React.useState('DEFAULT');
+  const [sidebarIsOpen, setSidebarIsOpen] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState();
+
+  React.useEffect(() => {
+    if (errorMessage && sku !== 'DEFAULT') {
+      setErrorMessage(undefined);
+    }
+  }, [errorMessage, sku]);
+
+  const handleClick = () => {
+    if (sku === 'DEFAULT') {
+      setErrorMessage('Please select a size.');
+      return;
+    }
+    updateOrder(item.id, item.slug, sku, 1, item.price);
+    // open the ProductSidebar
+    setSidebarIsOpen(true);
+  };
 
   return (
     <Layout>
@@ -40,10 +59,13 @@ export default function Product({ item }) {
                   ))}
                 </select>
               </div>
+              {errorMessage && (
+                <div className={styles.error}>{errorMessage}</div>
+              )}
               <button
                 type="submit"
                 className={styles.button}
-                onClick={() => updateOrder(item.id, sku, 1, item.price)}
+                onClick={handleClick}
               >
                 Add to order
               </button>
@@ -51,12 +73,21 @@ export default function Product({ item }) {
           </div>
         </div>
       </div>
+      <ProductSidebar
+        item={item}
+        sku={sku}
+        isOpen={sidebarIsOpen}
+        setIsOpen={setSidebarIsOpen}
+      />
     </Layout>
   );
 }
 
 export async function getServerSideProps(context) {
   const item = products.find(p => p.id === context.query.id);
+
+  console.log(context.query);
+  console.log(item);
 
   return {
     props: { item },

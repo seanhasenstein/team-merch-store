@@ -35,5 +35,5 @@ StoreItem.propTypes = {
   primary: PropTypes.string.isRequired,
   secondary: PropTypes.string.isRequired,
   imgUrl: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
 };

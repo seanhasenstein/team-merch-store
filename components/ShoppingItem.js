@@ -48,7 +48,7 @@ const ShoppingItem = ({ product, setSidebar }) => {
       return;
     }
     const { price } = product.skus.find(element => sku === element.id);
-    orderContext.updateOrder(product.id, sku, quantity, price);
+    orderContext.updateOrder(product.id, product.slug, sku, quantity, price);
 
     setQuantity(0);
     setSku('DEFAULT');

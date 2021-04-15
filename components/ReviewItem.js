@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
+import Link from 'next/link';
 import { OrderContext } from '../context/OrderContext';
 import { formatToMoney } from '../utils';
 import styles from '../styles/item.module.css';
 
 const ReviewItem = ({ item }) => {
+  console.log(item);
   const [sku, setSku] = useState(item.skuId);
   const orderContext = useContext(OrderContext);
   const { updateOrder, updateSku, removeItem } = orderContext;
@@ -13,13 +15,21 @@ const ReviewItem = ({ item }) => {
 
   return (
     <div className={styles.item}>
-      <img
-        className={styles.image}
-        src={product.imgUrl}
-        alt={product.primary}
-      />
+      <Link href={`/product/${item.slug}/${item.productId}`}>
+        <a>
+          <img
+            className={styles.image}
+            src={product.imgUrl}
+            alt={product.primary}
+          />
+        </a>
+      </Link>
       <div className={styles.details}>
-        <h3>{product.primary}</h3>
+        <Link href={`/product/${item.slug}/${item.productId}`}>
+          <a>
+            <h3>{product.primary}</h3>
+          </a>
+        </Link>
         <p>{product.secondary}</p>
         <p className={styles.price}>${formatToMoney(item.price)}</p>
       </div>
@@ -51,6 +61,7 @@ const ReviewItem = ({ item }) => {
             onChange={e =>
               updateOrder(
                 item.productId,
+                item.slug,
                 item.skuId,
                 e.target.value,
                 item.price,

@@ -68,7 +68,7 @@ const Sidebar = ({ sidebar, setSidebar }) => {
               <div className={styles.total}>
                 <span>Order Total:</span>${formatToMoney(orderTotal)}
               </div>
-              <Link href="/submit-order">
+              <Link href="/checkout">
                 <a className={styles.button}>
                   Go to Checkout
                   <svg

@@ -9,7 +9,7 @@ import OrderForm from '../components/OrderForm';
 import { formatToMoney } from '../utils';
 import styles from '../styles/main.module.css';
 
-const SubmitOrder = () => {
+const Checkout = () => {
   const orderContext = useContext(OrderContext);
   const { orderItems, orderTotal } = orderContext;
   return (
@@ -56,4 +56,4 @@ const SubmitOrder = () => {
   );
 };
 
-export default SubmitOrder;
+export default Checkout;

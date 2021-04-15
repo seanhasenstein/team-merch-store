@@ -91,7 +91,7 @@
   color: #f3f4f5;
   font-family: 'Gotham Rounded', sans-serif;
   font-size: 0.875rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1;
   letter-spacing: 0.75px;
   border: 2px solid transparent;
@@ -106,6 +106,13 @@
   outline: none;
   box-shadow: 0 0 0 4px rgba(149, 152, 162, 0.35);
   border-color: #303137;
+}
+
+.error {
+  margin: 0.375rem 0 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #de1d3b;
 }
 
 @media (max-width: 800px) {

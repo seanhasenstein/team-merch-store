@@ -8,7 +8,7 @@ import ReviewItem from '../components/ReviewItem';
 import { formatToMoney } from '../utils';
 import styles from '../styles/main.module.css';
 
-const ReviewOrder = () => {
+const Cart = () => {
   const orderContext = useContext(OrderContext);
   const { orderItems, orderTotal } = orderContext;
 
@@ -45,12 +45,14 @@ const ReviewOrder = () => {
                   ${formatToMoney(orderTotal)}
                 </div>
               </div>
-              <div className={styles['summary-item']}>
-                <div className={styles['summary-title']}>Transaction Fee</div>
-                <div className={styles['summary-data']}>
-                  ${formatToMoney(orderTotal * 0.029 + 30)}
+              {orderTotal > 0 && (
+                <div className={styles['summary-item']}>
+                  <div className={styles['summary-title']}>Transaction Fee</div>
+                  <div className={styles['summary-data']}>
+                    ${formatToMoney(orderTotal * 0.029 + 30)}
+                  </div>
                 </div>
-              </div>
+              )}
               <div
                 className={`${styles['summary-item']} ${styles['summary-total']}`}
               >
@@ -60,37 +62,14 @@ const ReviewOrder = () => {
                 </div>
               </div>
             </div>
-            <Link href="/submit-order">
+            <Link href="/checkout">
               <a className={styles.button}>Go to Checkout</a>
             </Link>
           </div>
         </div>
-        {/* <div className={styles.footer}>
-          <div className={styles.total}>
-            <span>Subtotal:</span> ${formatToMoney(orderTotal)}
-          </div>
-          <Link href="/submit-order">
-            <a className={styles.button}>
-              Go to checkout
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </a>
-          </Link>
-        </div> */}
       </div>
     </Layout>
   );
 };
 
-export default ReviewOrder;
+export default Cart;
