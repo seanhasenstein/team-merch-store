@@ -1,7 +1,7 @@
 import React, { useReducer, useContext } from 'react';
 import { OrderContext } from '../context/OrderContext';
 import { emailIsValid } from '../utils';
-import styles from '../styles/form.module.css';
+import styles from '../styles/checkoutForm.module.css';
 
 const INITIAL_STATE = {
   firstName: '',
@@ -32,9 +32,9 @@ const reducer = (state, action) => {
   }
 };
 
-const OrderForm = () => {
+const CheckoutForm = () => {
   const orderContext = useContext(OrderContext);
-  const { orderItems } = orderContext;
+  const { orderItems, orderTotal } = orderContext;
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
   const updateFieldValue = field => event => {
@@ -134,7 +134,7 @@ const OrderForm = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.inner}>
-        <h3 className={styles.title}>Order Information</h3>
+        <h3 className={styles.title}>Checkout Form</h3>
         <form
           className={styles.form}
           action="POST"
@@ -209,7 +209,10 @@ const OrderForm = () => {
             <div className={styles.error}>{state.phoneError}</div>
           ) : null}
           {/* TODO: add the honeypot! */}
-          <button type="submit" disabled={state.status === 'PENDING'}>
+          <button
+            type="submit"
+            disabled={orderTotal === 0 || state.status === 'PENDING'}
+          >
             {state.status === 'PENDING' ? 'Loading...' : 'Submit Your Order'}
           </button>
           {state.formError ? (
@@ -221,4 +224,4 @@ const OrderForm = () => {
   );
 };
 
-export default OrderForm;
+export default CheckoutForm;

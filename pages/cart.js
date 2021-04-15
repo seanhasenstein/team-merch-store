@@ -30,7 +30,7 @@ const Cart = () => {
         </Instructions>
         <div className={styles.list}>
           {orderItems.length < 1 ? (
-            <div className={styles.empty}>You have 0 items in your order.</div>
+            <div className={styles.empty}>You have no items in your order.</div>
           ) : (
             orderItems.map(item => <ReviewItem key={item.skuId} item={item} />)
           )}

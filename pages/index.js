@@ -1,71 +1,33 @@
-import React, { useContext, useState } from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
-import { OrderContext } from '../context/OrderContext';
+import React from 'react';
 import Layout from '../components/Layout';
-import ShoppingItem from '../components/ShoppingItem';
-import Instructions from '../components/Instructions';
-import Sidebar from '../components/Sidebar';
-import { formatToMoney } from '../utils';
-import styles from '../styles/main.module.css';
+import StoreItem from '../components/StoreItem';
+import { products } from '../data';
+import styles from '../styles/store.module.css';
 
-const Home = () => {
-  const orderContext = useContext(OrderContext);
-  const { products, orderTotal } = orderContext;
-  const [sidebar, setSidebar] = useState(false);
-
+export default function store() {
   return (
-    <>
-      <Layout>
-        <Head>
-          <title>Sheboygan Lutheran CC | 2020 Clothing Order</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <Instructions>
-          <h2>2020 Cross Country Order</h2>
-          <p>
-            Use this form for your 2020 Sheboygan Lutheran Cross Country
-            clothing and merchandise order.
-          </p>
-          <h4>Add Items to Your Order:</h4>
-        </Instructions>
-
-        <div className={styles.list}>
-          {products.map(product => (
-            <ShoppingItem
-              key={product.id}
-              product={product}
-              setSidebar={setSidebar}
+    <Layout>
+      <div className={styles.container}>
+        <h2 className={styles['page-title']}>
+          2021 Track &amp; Field Apparel Order
+        </h2>
+        <p className={styles['page-description']}>
+          Orders are due by Monday, April 19th.
+        </p>
+        <div className={styles.items}>
+          {products.map(p => (
+            <StoreItem
+              key={p.id}
+              id={p.id}
+              slug={p.slug}
+              primary={p.primary}
+              secondary={p.secondary}
+              imgUrl={p.imgUrl}
+              price={p.price}
             />
           ))}
         </div>
-        <div className={styles.footer}>
-          <div className={styles.total}>
-            <span>Subtotal:</span>${formatToMoney(orderTotal)}
-          </div>
-          <Link href="/cart">
-            <a className={styles.button}>
-              View Your Order
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </a>
-          </Link>
-        </div>
-      </Layout>
-      <Sidebar sidebar={sidebar} setSidebar={setSidebar} />
-    </>
+      </div>
+    </Layout>
   );
-};
-
-export default Home;
+}

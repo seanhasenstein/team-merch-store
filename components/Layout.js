@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   return (
     <div className={styles.bg}>
       <header className={styles.header}>
-        <Link href="/store">
+        <Link href="/">
           <a className={styles['stores-link']}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
