@@ -25,7 +25,6 @@ export default function Product({ item }) {
       return;
     }
     updateOrder(item.id, item.slug, sku, 1, item.price);
-    // open the ProductSidebar
     setSidebarIsOpen(true);
   };
 
@@ -85,9 +84,6 @@ export default function Product({ item }) {
 
 export async function getServerSideProps(context) {
   const item = products.find(p => p.id === context.query.id);
-
-  console.log(context.query);
-  console.log(item);
 
   return {
     props: { item },

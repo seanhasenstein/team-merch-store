@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
-import Instructions from '../components/Instructions';
 import SuccessItem from '../components/SuccessItem';
 import styles from '../styles/success.module.css';
 
@@ -11,14 +10,12 @@ const Success = () => {
       <Head>
         <title>Successful Order | Sheboygan Lutheran CC</title>
       </Head>
-      <Instructions>
-        <h2>We have received your order!</h2>
-        <p>
-          You should receive a confirmation email at seanhasenstein@gmail.com
-          shortly. Please remember to bring your cash or check to Coach Jurss.
-          If your order is incorrect you can <a href="#">email us here</a>.
-        </p>
-      </Instructions>
+      <h2>We have received your order!</h2>
+      <p>
+        You should receive a confirmation email at seanhasenstein@gmail.com
+        shortly. Please remember to bring your cash or check to Coach Jurss. If
+        your order is incorrect you can <a href="#">email us here</a>.
+      </p>
       <div className={styles.row}>
         <div className={styles.info}>
           <h3>Order Details:</h3>

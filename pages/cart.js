@@ -3,8 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { OrderContext } from '../context/OrderContext';
 import Layout from '../components/Layout';
-import Instructions from '../components/Instructions';
-import ReviewItem from '../components/ReviewItem';
+import CartItem from '../components/CartItem';
 import { formatToMoney } from '../utils';
 import styles from '../styles/main.module.css';
 
@@ -18,21 +17,15 @@ const Cart = () => {
         <title>Cart | 2021 Track &amp; Field Apparel Order</title>
       </Head>
       <div className={styles.cart}>
-        <Instructions>
-          <h3>Your Order</h3>
-          <p>
-            Confirm that your order is correct before continuing to checkout.
-          </p>
-          <h4>Order Items:</h4>
-          <div className={styles['order-details']}>
-            3 Items | ${formatToMoney(orderTotal)}
-          </div>
-        </Instructions>
+        <h3 className={styles['page-title']}>Your Order</h3>
+        <div className={styles['order-details']}>
+          3 Items | ${formatToMoney(orderTotal)}
+        </div>
         <div className={styles.list}>
           {orderItems.length < 1 ? (
             <div className={styles.empty}>You have no items in your order.</div>
           ) : (
-            orderItems.map(item => <ReviewItem key={item.skuId} item={item} />)
+            orderItems.map(item => <CartItem key={item.skuId} item={item} />)
           )}
         </div>
         <div className={styles.summary}>

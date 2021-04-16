@@ -4,8 +4,7 @@ import { OrderContext } from '../context/OrderContext';
 import { formatToMoney } from '../utils';
 import styles from '../styles/item.module.css';
 
-const ReviewItem = ({ item }) => {
-  console.log(item);
+const CartItem = ({ item }) => {
   const [sku, setSku] = useState(item.skuId);
   const orderContext = useContext(OrderContext);
   const { updateOrder, updateSku, removeItem } = orderContext;
@@ -105,4 +104,4 @@ const ReviewItem = ({ item }) => {
   );
 };
 
-export default ReviewItem;
+export default CartItem;

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { OrderContext } from '../context/OrderContext';
 import { formatToMoney } from '../utils';
-import styles from '../styles/submit-item.module.css';
+import styles from '../styles/checkoutItem.module.css';
 
-const SubmitItem = ({ item }) => {
+const CheckoutItem = ({ item }) => {
   const orderContext = useContext(OrderContext);
   const product = orderContext.products.find(
     product => item.productId === product.id,
@@ -31,4 +31,4 @@ const SubmitItem = ({ item }) => {
   );
 };
 
-export default SubmitItem;
+export default CheckoutItem;
