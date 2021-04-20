@@ -14,9 +14,7 @@ const SuccessItem = () => {
       <div className={styles.quantity}>
         <span>Qty:</span>1
       </div>
-      <div className={styles.total}>
-        <span>$</span>15.00
-      </div>
+      <div className={styles.total}>$15.00</div>
     </div>
   );
 };

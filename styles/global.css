@@ -21,7 +21,7 @@ body {
   font-size: 16px;
   margin: 0;
   padding: 0;
-  background-color: #f1f2f4;
+  background-color: rgb(249, 250, 251);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -69,10 +69,10 @@ input,
 select {
   appearance: none;
   background-color: #fff;
-  border: 2px solid #dddde2;
+  border: 1px solid #dddde2;
   border-radius: 0.375rem;
-  padding: 0.5rem 0.75rem;
-  font-size: 1rem;
+  padding: 0.4375rem 0.75rem;
+  font-size: 0.875rem;
   line-height: 1.5;
 }
 
@@ -96,15 +96,15 @@ select {
   color-adjust: exact;
   background-repeat: no-repeat;
   background-color: #fff;
-  border: 2px solid #dddde2;
+  border: 1px solid #dddde2;
   border-radius: 0.375rem;
-  padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+  padding: 0 2.5rem 0 0.75rem;
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
   background-position: right 0.5rem center;
   background-size: 1.375em 1.375em;
-  height: 48px;
+  height: 42px;
   cursor: pointer;
 }
 
@@ -112,4 +112,12 @@ select:focus {
   outline: none;
   box-shadow: 0 0 0 4px rgba(65, 141, 203, 0.2);
   border-color: #8faef4;
+}
+
+@media (max-width: 500px) {
+  .form-input,
+  input,
+  select {
+    font-size: 1rem;
+  }
 }

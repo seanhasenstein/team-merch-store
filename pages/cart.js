@@ -5,7 +5,7 @@ import { OrderContext } from '../context/OrderContext';
 import Layout from '../components/Layout';
 import CartItem from '../components/CartItem';
 import { formatToMoney } from '../utils';
-import styles from '../styles/main.module.css';
+import styles from '../styles/cart.module.css';
 
 const Cart = () => {
   const orderContext = useContext(OrderContext);
@@ -38,20 +38,18 @@ const Cart = () => {
                   ${formatToMoney(orderTotal)}
                 </div>
               </div>
-              {orderTotal > 0 && (
-                <div className={styles['summary-item']}>
-                  <div className={styles['summary-title']}>Transaction Fee</div>
-                  <div className={styles['summary-data']}>
-                    ${formatToMoney(orderTotal * 0.029 + 30)}
-                  </div>
+              <div className={styles['summary-item']}>
+                <div className={styles['summary-title']}>Transaction Fee</div>
+                <div className={styles['summary-data']}>
+                  ${formatToMoney(orderTotal > 0 ? orderTotal * 0.029 + 30 : 0)}
                 </div>
-              )}
+              </div>
               <div
                 className={`${styles['summary-item']} ${styles['summary-total']}`}
               >
                 <div className={styles['summary-title']}>Total</div>
                 <div className={styles['summary-data']}>
-                  ${formatToMoney(orderTotal + (orderTotal * 0.029 + 0.3))}
+                  ${formatToMoney(orderTotal + (orderTotal * 0.029 + 30))}
                 </div>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import Layout from '../components/Layout';
 import StoreItem from '../components/StoreItem';
 import { products } from '../data';
@@ -7,6 +8,9 @@ import styles from '../styles/store.module.css';
 export default function store() {
   return (
     <Layout>
+      <Head>
+        <title>2021 Track &amp; Field Apparel Order</title>
+      </Head>
       <div className={styles.container}>
         <h2 className={styles['page-title']}>
           2021 Track &amp; Field Apparel Order

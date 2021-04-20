@@ -1,4 +1,5 @@
 .container {
+  padding: 0 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,18 +12,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* NEW STUFF */
+  background-color: #fcfcfd;
+  border-radius: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
 .image {
-  padding: 2rem;
+  margin: 1.5rem 0;
+  padding: 0.5rem 2rem;
   width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
-  border-radius: 0.125rem;
+  /* background-color: #fcfcfd;
+  border-radius: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; */
+  border-right: 1px solid #e5e7eb;
 }
 
 .image img {
@@ -31,16 +39,16 @@
 }
 
 .details {
-  width: 50%;
+  margin: 0 auto;
+  max-width: 300px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
 }
 
 .item-title {
   margin: 0 0 0.75rem;
-  font-size: 1.25rem;
-  text-align: right;
+  font-size: 1.125rem;
 }
 
 .price {
@@ -70,8 +78,8 @@
 }
 
 .select {
-  padding: 0 14px;
-  height: 48px;
+  padding: 0 0.875rem;
+  height: 42px;
   width: 100%;
   font-weight: 500;
   line-height: 1.25rem;
@@ -81,19 +89,18 @@
 }
 
 .button {
-  margin: 1rem 0 0;
-  padding: 0.875rem 1.25rem;
+  margin: 1.125rem 0 0;
+  padding: 0.75rem 1.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: #484a52; */
   background-color: #3a3f4a;
   color: #f3f4f5;
   font-family: 'Gotham Rounded', sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.75px;
+  letter-spacing: 0.0375em;
   border: 2px solid transparent;
 }
 
@@ -117,16 +124,23 @@
 
 @media (max-width: 800px) {
   .row {
-    padding: 0 1.25rem;
     flex-direction: column;
   }
 
   .image {
-    width: 100%;
+    margin: 0 1.5rem;
+    padding: 2rem;
+    width: calc(100% - 3rem);
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .image img {
+    max-width: 175px;
   }
 
   .details {
-    margin: 2rem 0 0;
+    margin: 2.5rem 0 3rem;
     width: 100%;
     align-items: center;
   }

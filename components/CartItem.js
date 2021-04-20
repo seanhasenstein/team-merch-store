@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import Link from 'next/link';
 import { OrderContext } from '../context/OrderContext';
 import { formatToMoney } from '../utils';
-import styles from '../styles/item.module.css';
+import styles from '../styles/cartItem.module.css';
 
 const CartItem = ({ item }) => {
   const [sku, setSku] = useState(item.skuId);
